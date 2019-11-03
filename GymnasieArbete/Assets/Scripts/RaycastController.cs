@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class RaycastController : MonoBehaviour
 {
+
     public LayerMask collisionMask;
 
     public const float skinWidth = .015f;
@@ -19,6 +19,7 @@ public class RaycastController : MonoBehaviour
     [HideInInspector]
     public BoxCollider2D collider;
     public RaycastOrigins raycastOrigins;
+
     public virtual void Start()
     {
         collider = GetComponent<BoxCollider2D>();
