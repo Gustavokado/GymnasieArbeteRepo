@@ -67,7 +67,7 @@ public class Controller2D : RaycastController
             if (hit)
             {
 
-                if (hit.distance == 0)
+                if (hit.distance == skinWidth || hit.distance == -skinWidth)
                 {
                     continue;
                 }
