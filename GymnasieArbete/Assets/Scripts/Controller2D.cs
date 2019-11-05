@@ -22,18 +22,17 @@ public class Controller2D : RaycastController
         collisions.Reset();
         collisions.velocityOld = velocity;
 
-        if (velocity.x !=0)
+        if (velocity.x != 0)
         {
-            collisions.faceDir = (int) Mathf.Sign(velocity.x);
+            collisions.faceDir = (int)Mathf.Sign(velocity.x);
         }
 
         if (velocity.y < 0)
         {
             DescendSlope(ref velocity);
         }
- 
+
         HorizontalCollisions(ref velocity);
-        
         if (velocity.y != 0)
         {
             VerticalCollisions(ref velocity);
@@ -116,6 +115,7 @@ public class Controller2D : RaycastController
 
         for (int i = 0; i < verticalRayCount; i++)
         {
+
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);

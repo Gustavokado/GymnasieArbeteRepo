@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlatformController : RaycastController
 {
 
-    public LayerMask passengerMask;    
+    public LayerMask passengerMask;
 
     public Vector3[] localWaypoints;
     Vector3[] globalWaypoints;
@@ -13,7 +13,7 @@ public class PlatformController : RaycastController
     public float speed;
     public bool cyclic;
     public float waitTime;
-    [Range(0,2)]
+    [Range(0, 2)]
     public float easeAmount;
 
     int fromWaypointIndex;
@@ -56,6 +56,7 @@ public class PlatformController : RaycastController
 
     Vector3 CalculatePlatformMovement()
     {
+
         if (Time.time < nextMoveTime)
         {
             return Vector3.zero;
@@ -64,7 +65,7 @@ public class PlatformController : RaycastController
         fromWaypointIndex %= globalWaypoints.Length;
         int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
         float distanceBetweenWaypoints = Vector3.Distance(globalWaypoints[fromWaypointIndex], globalWaypoints[toWaypointIndex]);
-        percentBetweenWaypoints += Time.deltaTime * speed/distanceBetweenWaypoints;
+        percentBetweenWaypoints += Time.deltaTime * speed / distanceBetweenWaypoints;
         percentBetweenWaypoints = Mathf.Clamp01(percentBetweenWaypoints);
         float easedPercentBetweenWaypoints = Ease(percentBetweenWaypoints);
 
@@ -73,7 +74,7 @@ public class PlatformController : RaycastController
         if (percentBetweenWaypoints >= 1)
         {
             percentBetweenWaypoints = 0;
-            fromWaypointIndex ++;
+            fromWaypointIndex++;
 
             if (!cyclic)
             {
@@ -204,19 +205,20 @@ public class PlatformController : RaycastController
         }
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
-        if (localWaypoints!=null)
+        if (localWaypoints != null)
         {
             Gizmos.color = Color.red;
             float size = .3f;
 
             for (int i = 0; i < localWaypoints.Length; i++)
             {
-                Vector3 globalWaypointPos = (Application.isPlaying)?globalWaypoints[i]: localWaypoints[i] + transform.position;
+                Vector3 globalWaypointPos = (Application.isPlaying) ? globalWaypoints[i] : localWaypoints[i] + transform.position;
                 Gizmos.DrawLine(globalWaypointPos - Vector3.up * size, globalWaypointPos + Vector3.up * size);
                 Gizmos.DrawLine(globalWaypointPos - Vector3.left * size, globalWaypointPos + Vector3.left * size);
             }
         }
     }
+
 }

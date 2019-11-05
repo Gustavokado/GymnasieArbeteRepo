@@ -44,8 +44,7 @@ public class Player : MonoBehaviour
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
         bool wallSliding = false;
-
-        if ((controller.collisions.left||controller.collisions.right)&&!controller.collisions.below&&velocity.y<0)
+        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
         {
             wallSliding = true;
 
@@ -58,25 +57,29 @@ public class Player : MonoBehaviour
             {
                 velocityXSmoothing = 0;
                 velocity.x = 0;
-                if (input.x != wallDirX && input.x != wallDirX)
+
+                if (input.x != wallDirX && input.x != 0)
                 {
                     timeToWallUnstick -= Time.deltaTime;
                 }
                 else
                 {
                     timeToWallUnstick = wallStickTime;
-                }               
+                }
             }
             else
             {
                 timeToWallUnstick = wallStickTime;
             }
+
         }
 
         if (controller.collisions.above || controller.collisions.below)
         {
             velocity.y = 0;
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -101,10 +104,10 @@ public class Player : MonoBehaviour
             if (controller.collisions.below)
             {
                 velocity.y = jumpVelocity;
-            }           
+            }
         }
 
-        
+
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
