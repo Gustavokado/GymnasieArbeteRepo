@@ -26,5 +26,13 @@ public class PlayerInput : MonoBehaviour
         {
             player.OnJumpInputUp();
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            player.OnSprintInputDown();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            player.OnSprintInputUp();
+        }
     }
 }

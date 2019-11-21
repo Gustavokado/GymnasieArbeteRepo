@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     public float timeToJumpApex = .4f;  
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    float moveSpeed = 6;
+    public float moveSpeed = 6;
+    public float sprintSpeed = 10;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -117,6 +118,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnSprintInputDown()
+    {
+        moveSpeed += sprintSpeed;
+    }
+
+    public void OnSprintInputUp()
+    {
+        moveSpeed -= sprintSpeed;
+    }
+    
     void HandleWallSliding()
     {
         wallDirX = (controller.collisions.left) ? -1 : 1;
