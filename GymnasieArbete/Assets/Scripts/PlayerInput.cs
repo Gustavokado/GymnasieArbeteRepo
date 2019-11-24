@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
 {
     Player player;
     float movementSpeed = 2.0f;
+    
 
     void Start()
     {
@@ -51,6 +52,11 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButtonUp("B Button"))
         {
             player.OnSprintInputUp();
+        }
+
+        if (Input.GetButtonDown("X Button"))
+        {
+            player.OnFireInputDown();
         }
     }
 }

@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     float velocityXSmoothing;
 
     Controller2D controller;
+    public GameObject projectile;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -66,6 +67,11 @@ public class Player : MonoBehaviour
     public void SetDirectionalInput (Vector2 input)
     {
         directionalInput = input;
+    }
+
+    public int GetFaceDir()
+    {
+        return controller.collisions.faceDir;
     }
 
     public void OnJumpInputDown()
@@ -126,6 +132,11 @@ public class Player : MonoBehaviour
     public void OnSprintInputUp()
     {
         moveSpeed -= sprintSpeed;
+    }
+
+    public void OnFireInputDown()
+    {
+        Instantiate(projectile, transform.position, transform.rotation);
     }
     
     void HandleWallSliding()
