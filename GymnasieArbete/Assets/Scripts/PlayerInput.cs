@@ -37,24 +37,24 @@ public class PlayerInput : MonoBehaviour
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         player.SetDirectionalInput(directionalInput);
         
-        if (Input.GetButtonDown("A Button"))
+        if (Input.GetButtonDown("A Button") || Input.GetKeyDown(KeyCode.Space))
         {
             player.OnJumpInputDown();
         }
-        if (Input.GetButtonUp("A Button"))
+        if (Input.GetButtonUp("A Button") || Input.GetKeyUp(KeyCode.Space))
         {
             player.OnJumpInputUp();
         }
-        if (Input.GetButtonDown("B Button"))
+        if (Input.GetButtonDown("B Button") || Input.GetKeyDown(KeyCode.LeftShift))
         {
             player.OnSprintInputDown();
         }
-        if (Input.GetButtonUp("B Button"))
+        if (Input.GetButtonUp("B Button") || Input.GetKeyUp(KeyCode.LeftShift))
         {
             player.OnSprintInputUp();
         }
 
-        if (Input.GetButtonDown("X Button"))
+        if (Input.GetButtonDown("X Button") || Input.GetKeyDown(KeyCode.X))
         {
             player.OnFireInputDown();
         }
