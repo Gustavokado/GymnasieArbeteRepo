@@ -51,6 +51,7 @@ public class Projectile : RaycastController
                 Destroy(gameObject);
 
                 if (hit.collider.tag == "Destructible")
+
                 {
                     Destroy(hit.collider.gameObject);
                 }
