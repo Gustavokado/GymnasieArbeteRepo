@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     public float moveSpeed = 6;
     public float sprintSpeed = 10;
 
+    public bool hasWallJump;
+    public bool hasDoubleJump;
+    public bool hasShoot;
+
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -29,6 +33,7 @@ public class Player : MonoBehaviour
 
     Controller2D controller;
     public GameObject projectile;
+    
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -78,6 +83,11 @@ public class Player : MonoBehaviour
     {
         if (wallSliding)
         {
+            if (hasDoubleJump)
+            {
+                controller.collisions.canJumpAgain = true;
+            }
+            
             if (wallDirX == directionalInput.x)
             {
                 velocity.x = -wallDirX * wallJumpClimb.x;
@@ -94,7 +104,7 @@ public class Player : MonoBehaviour
                 velocity.y = wallLeap.y;
             }
         }
-        if (controller.collisions.below || controller.collisions.canJumpAgain)
+        else if (controller.collisions.below || controller.collisions.canJumpAgain)
         {
             
             if (controller.collisions.slidingDownMaxSlope)
@@ -143,7 +153,7 @@ public class Player : MonoBehaviour
     {
         wallDirX = (controller.collisions.left) ? -1 : 1;
         wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0 && hasWallJump)
         {
             wallSliding = true;
 

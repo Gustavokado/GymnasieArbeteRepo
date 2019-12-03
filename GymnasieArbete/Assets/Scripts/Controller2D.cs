@@ -10,10 +10,13 @@ public class Controller2D : RaycastController
     [HideInInspector]
     public Vector2 playerInput;
 
+    public Player player;
+
     public override void Start()
     {
         base.Start();
         collisions.faceDir = 1;
+        player = GameObject.Find("player").GetComponent<Player>();
     }
 
     public void Move(Vector2 moveAmount, bool standingOnPlatform)
@@ -77,6 +80,22 @@ public class Controller2D : RaycastController
                     continue;
                 }
 
+                if (hit.collider.tag=="Walljump")
+                {
+                    player.hasWallJump = true;
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag=="Doublejump")
+                {
+                    player.hasDoubleJump = true;
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag=="Shoot")
+                {
+                    player.hasShoot = true;
+                    Destroy(hit.collider.gameObject);
+                }
+
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
                 if (i == 0 && slopeAngle <= maxSlopeAngle)
@@ -129,6 +148,22 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+                if (hit.collider.tag == "Walljump")
+                {
+                    player.hasWallJump = true;
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag == "Doublejump")
+                {
+                    player.hasDoubleJump = true;
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag == "Shoot")
+                {
+                    player.hasShoot = true;
+                    Destroy(hit.collider.gameObject);
+                }
+
                 collisions.canJumpAgain = true;
                 if (hit.collider.tag == "Through")
                 {

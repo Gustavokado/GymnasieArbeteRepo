@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Through
   - Destructible
+  - Walljump
+  - Doublejump
+  - Shoot
   layers:
   - Default
   - TransparentFX
