@@ -146,7 +146,10 @@ public class Player : MonoBehaviour
 
     public void OnFireInputDown()
     {
-        Instantiate(projectile, transform.position, transform.rotation);
+        if (hasShoot)
+        {
+            Instantiate(projectile, transform.position, transform.rotation);
+        }       
     }
     
     void HandleWallSliding()

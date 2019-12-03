@@ -6,8 +6,9 @@ using UnityEngine;
 public class Projectile : RaycastController
 {
     float faceX;
-    public Player player;
+    public Player player;   
     public float speed;
+    public Door door;
 
     public LayerMask obstaclesMask;
 
@@ -15,6 +16,7 @@ public class Projectile : RaycastController
     {
         base.Start();
         player = GameObject.Find("player").GetComponent<Player>();
+        door = GameObject.Find("Button door").GetComponent<Door>();
         faceX = player.GetFaceDir();
     }
 
@@ -51,9 +53,14 @@ public class Projectile : RaycastController
                 Destroy(gameObject);
 
                 if (hit.collider.tag == "Destructible")
-
                 {
                     Destroy(hit.collider.gameObject);
+                }
+
+                if (hit.collider.tag=="button")
+                {
+                    door.isFalling = true;
+                    door.startTime = Time.time;
                 }
             }
         }

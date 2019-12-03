@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FallingPlatform : RaycastController
+public class Door : RaycastController
 {
 
     public LayerMask passengerMask;
@@ -11,10 +11,10 @@ public class FallingPlatform : RaycastController
     
     public float easeAmount;
 
-    bool isFalling;
+    public bool isFalling;
 
-    public float waitTime;
-    float startTime;
+    
+    public float startTime;
 
     List<PassengerMovement> passengerMovement;
     Dictionary<Transform, Controller2D> passengerDictionary = new Dictionary<Transform, Controller2D>();
@@ -53,27 +53,12 @@ public class FallingPlatform : RaycastController
 
     void CheckIfFalling()
     {
-        float directionY = 1;
-
-        float rayLength = skinWidth;
-        
-        for (int i = 0; i < verticalRayCount; i++)
-        {
-            Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
-            rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, passengerMask);
-
-            if (hit && hit.distance != 0)
-            {
-                isFalling = true;
-                startTime = Time.time;
-            }           
-        }       
+           
     }
 
     Vector3 CalculatePlatformMovement()
     {
-        if (Time.time > startTime+waitTime)
+        if (Time.time > startTime)
         {
             Vector3 newPos = transform.position;
             newPos.y -= speed * Time.deltaTime;

@@ -164,7 +164,11 @@ public class Controller2D : RaycastController
                     Destroy(hit.collider.gameObject);
                 }
 
-                collisions.canJumpAgain = true;
+                if (player.hasDoubleJump)
+                {
+                    collisions.canJumpAgain = true;
+                }
+                
                 if (hit.collider.tag == "Through")
                 {
                     if (directionY==1 || hit.distance == 0)
@@ -279,7 +283,7 @@ public class Controller2D : RaycastController
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
             if (slopeAngle>maxSlopeAngle)
             {
-                moveAmount.x = hit.normal.x * (Mathf.Abs(moveAmount.y) - hit.distance) / Mathf.Tan(slopeAngle * Mathf.Deg2Rad);
+                moveAmount.x = hit.normal.x * (Mathf.Abs(moveAmount.y) - hit.distance) / Mathf.Tan(slopeAngle * Mathf.Deg2Rad) + moveAmount.x;
 
                 collisions.slopeAngle = slopeAngle;
                 collisions.slidingDownMaxSlope = true;

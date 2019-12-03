@@ -9,6 +9,7 @@ TagManager:
   - Walljump
   - Doublejump
   - Shoot
+  - button
   layers:
   - Default
   - TransparentFX
